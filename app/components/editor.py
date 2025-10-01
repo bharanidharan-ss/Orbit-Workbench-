@@ -1,7 +1,6 @@
 import reflex as rx
 from reflex_monaco import monaco
-from app.states.query_state import QueryState
-from app.states.ui_state import UIState
+from app.state import QueryState, UIState
 from app.components.results_table import results_table
 from app.components.er_diagram import er_diagram_view
 

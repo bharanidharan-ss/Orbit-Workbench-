@@ -1,5 +1,5 @@
 import reflex as rx
-from app.states.query_state import QueryState
+from app.state import QueryState
 
 
 def er_diagram_view() -> rx.Component:

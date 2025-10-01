@@ -1,7 +1,5 @@
 import reflex as rx
-from app.states.db_state import DBState, Database, Table
-from app.states.query_state import QueryState
-from app.states.ui_state import UIState
+from app.state import DBState, Database, Table, QueryState, UIState
 
 
 def schema_item(

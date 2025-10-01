@@ -36,3 +36,4 @@ psycopg2-binary
 duckdb
 polars
 pandas
+reflex-monaco

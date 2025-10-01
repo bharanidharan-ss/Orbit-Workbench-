@@ -1,6 +1,5 @@
 import reflex as rx
-from app.states.ui_state import UIState
-from app.states.query_state import QueryState
+from app.state import UIState, QueryState
 
 
 def status_bar() -> rx.Component:
@@ -11,7 +10,7 @@ def status_bar() -> rx.Component:
             class_name="flex items-center gap-2",
         ),
         rx.el.div(
-            rx.el.span(f"Query: {QueryState.query_time.to_string()}s"),
+            rx.el.span(f"Query: {QueryState.last_query_time.to_string()}s"),
             class_name="flex items-center gap-4",
         ),
         class_name="h-10 px-4 flex items-center justify-between border-t border-gray-200 bg-gray-50 text-xs text-gray-600",

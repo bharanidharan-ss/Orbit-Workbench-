@@ -1,7 +1,5 @@
 import reflex as rx
-from app.states.ui_state import UIState
-from app.states.db_state import DBState
-from app.states.query_state import QueryState
+from app.state import UIState, DBState, QueryState, SessionState
 
 
 def _modal_overlay() -> rx.Component:
@@ -236,5 +234,46 @@ def connect_db_modal() -> rx.Component:
                 ),
             ],
             on_close=UIState.toggle_connect_db_modal,
+        ),
+    )
+
+
+def import_session_modal() -> rx.Component:
+    return rx.cond(
+        UIState.show_import_session_modal,
+        _modal_base(
+            [
+                rx.el.h2(
+                    "Import Session (.orb)",
+                    class_name="text-xl font-bold text-gray-800 mb-4",
+                ),
+                rx.upload.root(
+                    rx.el.div(
+                        rx.icon("cloud_upload", size=32, class_name="text-gray-500"),
+                        rx.el.h3(
+                            "Click to upload or drag and drop",
+                            class_name="font-medium text-gray-700 mt-2",
+                        ),
+                        rx.el.p(
+                            "ORB files up to 10MB", class_name="text-sm text-gray-500"
+                        ),
+                        class_name="text-center",
+                    ),
+                    id="import-orb-upload",
+                    on_drop=SessionState.handle_session_upload(
+                        rx.upload_files(upload_id="import-orb-upload")
+                    ),
+                    class_name="flex items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 p-4",
+                ),
+                rx.el.div(
+                    rx.el.button(
+                        "Close",
+                        on_click=UIState.toggle_import_session_modal,
+                        class_name="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200",
+                    ),
+                    class_name="flex justify-end gap-3 mt-6",
+                ),
+            ],
+            on_close=UIState.toggle_import_session_modal,
         ),
     )
